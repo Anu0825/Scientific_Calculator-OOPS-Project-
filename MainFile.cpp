@@ -3,7 +3,8 @@
 #include <map>
 #include <string>
 
-std::map<std::string, double> trigonometryFunctions(double angleRad) {
+std::map<std::string, double> trigonometryFunctions(double angleRad)
+{
     std::map<std::string, double> results;
 
     // Basic trigonometric functions
@@ -13,21 +14,30 @@ std::map<std::string, double> trigonometryFunctions(double angleRad) {
 
     // Inverse trigonometric functions
     // Use try-catch in case the value is out of domain
-    try {
+    try
+    {
         results["arcsin"] = std::asin(results["sin"]);
-    } catch (...) {
+    }
+    catch (...)
+    {
         results["arcsin"] = NAN;
     }
 
-    try {
+    try
+    {
         results["arccos"] = std::acos(results["cos"]);
-    } catch (...) {
+    }
+    catch (...)
+    {
         results["arccos"] = NAN;
     }
 
-    try {
+    try
+    {
         results["arctan"] = std::atan(results["tan"]);
-    } catch (...) {
+    }
+    catch (...)
+    {
         results["arctan"] = NAN;
     }
 
@@ -44,15 +54,19 @@ std::map<std::string, double> trigonometryFunctions(double angleRad) {
     return results;
 }
 
-std::map<std::string, double> logarithmicFunctions(double value) {
+std::map<std::string, double> logarithmicFunctions(double value)
+{
     std::map<std::string, double> results;
 
     // Basic logarithmic functions
-    if (value > 0) {
-        results["ln"] = std::log(value);         // Natural logarithm (base e)
-        results["log10"] = std::log10(value);    // Logarithm base 10
-        results["log2"] = std::log2(value);      // Logarithm base 2
-    } else {
+    if (value > 0)
+    {
+        results["ln"] = std::log(value);      // Natural logarithm (base e)
+        results["log10"] = std::log10(value); // Logarithm base 10
+        results["log2"] = std::log2(value);   // Logarithm base 2
+    }
+    else
+    {
         results["ln"] = NAN;
         results["log10"] = NAN;
         results["log2"] = NAN;
@@ -60,20 +74,24 @@ std::map<std::string, double> logarithmicFunctions(double value) {
 
     // Custom base logarithm function (e.g., base 5)
     double base = 5.0;
-    if (value > 0 && base > 0 && base != 1) {
+    if (value > 0 && base > 0 && base != 1)
+    {
         results["log_base_" + std::to_string(static_cast<int>(base))] = std::log(value) / std::log(base);
-    } else {
+    }
+    else
+    {
         results["log_base_" + std::to_string(static_cast<int>(base))] = NAN;
     }
 
     return results;
 }
 
-std::map<std::string, double> exponentialFunctions(double value) {
+std::map<std::string, double> exponentialFunctions(double value)
+{
     std::map<std::string, double> results;
 
     // Standard exponential function
-    results["exp"] = std::exp(value);            // e^value
+    results["exp"] = std::exp(value); // e^value
 
     // Exponential with a custom base (e.g., 2^value)
     double base = 2.0;
@@ -84,25 +102,27 @@ std::map<std::string, double> exponentialFunctions(double value) {
     results["base_" + std::to_string(static_cast<int>(base)) + "^value"] = std::pow(base, value);
 
     // Square and cube functions as specific examples
-    results["square"] = std::pow(value, 2);      // value^2
-    results["cube"] = std::pow(value, 3);        // value^3
+    results["square"] = std::pow(value, 2); // value^2
+    results["cube"] = std::pow(value, 3);   // value^3
 
     return results;
 }
 
-std::map<std::string, bool> logicalOperations(bool a, bool b) {
+std::map<std::string, bool> logicalOperations(bool a, bool b)
+{
     std::map<std::string, bool> results;
 
     // Logical operators
-    results["a && b"] = a && b;          // Logical AND
-    results["a || b"] = a || b;          // Logical OR
-    results["!a"] = !a;                  // Logical NOT on a
-    results["!b"] = !b;                  // Logical NOT on b
+    results["a && b"] = a && b; // Logical AND
+    results["a || b"] = a || b; // Logical OR
+    results["!a"] = !a;         // Logical NOT on a
+    results["!b"] = !b;         // Logical NOT on b
 
     return results;
 }
 
-std::map<std::string, int> bitwiseOperations(int x, int y) {
+std::map<std::string, int> bitwiseOperations(int x, int y)
+{
     std::map<std::string, int> results;
 
     // Bitwise operators
@@ -113,23 +133,27 @@ std::map<std::string, int> bitwiseOperations(int x, int y) {
     results["~y (1's complement)"] = ~y; // Bitwise NOT (1's complement) on y
 
     // 2's Complement
-    results["2's complement of x"] = ~x + 1;    // 2's complement of x
-    results["2's complement of y"] = ~y + 1;    // 2's complement of y
+    results["2's complement of x"] = ~x + 1; // 2's complement of x
+    results["2's complement of y"] = ~y + 1; // 2's complement of y
 
     return results;
 }
 
-unsigned long long factorial(int n) {
+unsigned long long factorial(int n)
+{
     unsigned long long result = 1;
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 1; i <= n; ++i)
+    {
         result *= i;
     }
     return result;
 }
 
 // Function to calculate GCD using Euclid's Algorithm
-int gcd(int a, int b) {
-    while (b != 0) {
+int gcd(int a, int b)
+{
+    while (b != 0)
+    {
         int temp = b;
         b = a % b;
         a = temp;
@@ -138,11 +162,13 @@ int gcd(int a, int b) {
 }
 
 // Function to calculate LCM using the GCD
-int lcm(int a, int b) {
+int lcm(int a, int b)
+{
     return std::abs(a * b) / gcd(a, b);
 }
 
-void calculateRootsAndPowers(double value, double exponent) {
+void calculateRootsAndPowers(double value, double exponent)
+{
     std::cout << "Value: " << value << std::endl;
     std::cout << "Square Root (√" << value << "): " << std::sqrt(value) << std::endl;
     std::cout << "Cube Root (³√" << value << "): " << std::cbrt(value) << std::endl;
@@ -150,43 +176,50 @@ void calculateRootsAndPowers(double value, double exponent) {
 }
 
 // Function to calculate nCr (Combinations)
-unsigned long long nCr(int n, int r) {
-    if (r > n) return 0; // If r is greater than n, nCr is 0
+unsigned long long nCr(int n, int r)
+{
+    if (r > n)
+        return 0; // If r is greater than n, nCr is 0
     return factorial(n) / (factorial(r) * factorial(n - r));
 }
 
 // Function to calculate nPr (Permutations)
-unsigned long long nPr(int n, int r) {
-    if (r > n) return 0; // If r is greater than n, nPr is 0
+unsigned long long nPr(int n, int r)
+{
+    if (r > n)
+        return 0; // If r is greater than n, nPr is 0
     return factorial(n) / factorial(n - r);
 }
 
-
-int main() {
-    double angleDeg = 45.0;  // Angle in degrees
-    double angleRad = angleDeg * M_PI / 180.0;  // Convert to radians
+int main()
+{
+    double angleDeg = 45.0;                    // Angle in degrees
+    double angleRad = angleDeg * M_PI / 180.0; // Convert to radians
 
     std::map<std::string, double> result = trigonometryFunctions(angleRad);
 
     // Output the results
-    for (const auto& pair : result) {
+    for (const auto &pair : result)
+    {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
-    double value = 100.0;  // Value for which to calculate logarithms
+    double value = 100.0; // Value for which to calculate logarithms
 
     std::map<std::string, double> result = logarithmicFunctions(value);
 
     // Output the results
-    for (const auto& pair : result) {
+    for (const auto &pair : result)
+    {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
 
-    double value = 3.0;  // The exponent to use for calculations
+    double value = 3.0; // The exponent to use for calculations
 
     std::map<std::string, double> result = exponentialFunctions(value);
 
     // Output the results
-    for (const auto& pair : result) {
+    for (const auto &pair : result)
+    {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
 
